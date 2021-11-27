@@ -1,0 +1,10 @@
+expo init U3DMI --npm
+
+npm install @react-navigation/native
+expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+npm install @react-navigation/bottom-tabs
+npm install --save styled-components
+
+expo install firebase@8.2.3
+expo install expo-image-picker

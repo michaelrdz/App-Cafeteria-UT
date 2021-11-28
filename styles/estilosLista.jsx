@@ -11,7 +11,7 @@ export const estilosLista = StyleSheet.create({
     cabecera: {
         flexDirection: "row",
         backgroundColor: COLORS.GrisFuerte,
-        height: 100,
+        height: 200,
     },
     textoListaVacia: {
         color: COLORS.PrincipalPink,

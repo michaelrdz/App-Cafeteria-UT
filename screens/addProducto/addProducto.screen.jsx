@@ -3,14 +3,14 @@ import {StyleSheet, Text, TouchableOpacity, View, TextInput, Image, ScrollView, 
 import { StyledView, StyledTextoLista, StyledInput } from "../../styles/StyledComp";
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
-import AddProducto from "../addProducto";
 import Icon from 'react-native-vector-icons/Ionicons';
 import 'firebase/storage';
 
-  const addMenuScreen = ({}) => {
+  const addProductoScreen = ({setProductosVisbles, IdMenu, setIdMenu}) => {
   
-    const item = {"Titulo":""};
+    const item = {"Titulo":"", "Precio": ""};
     const [titulo, setTitulo] = useState();
+    const [precio, setPrecio] = useState();
     const [listar, setListar] = useState([]);
 
     useEffect(() => {
@@ -22,8 +22,9 @@ import 'firebase/storage';
   const crearItem = () => {
     try {
       if (titulo.length > 0) {
-        const todoRef = database.ref("Menu");
+        const todoRef = database.ref("Menu/"+IdMenu+"/productos");
         item.Titulo = titulo;
+        item.Precio = precio;
         todoRef.push(item);
         //console.log(item);
         listarItems();
@@ -39,7 +40,7 @@ import 'firebase/storage';
   // Consultar la informacion
   const listarItems = () => {
     //console.log("listando");
-    const todoRef = database.ref("Menu");
+    const todoRef = database.ref("Menu/"+IdMenu+"/productos");
     todoRef.on("value", (snapshot) => {
       const items= snapshot.val();
       const itemListar= [];
@@ -53,54 +54,59 @@ import 'firebase/storage';
 
   // Eliminar Item
   const eliminarItem = ( ID ) => {
-    const todoRef = database.ref("Menu").child(ID);
+    const todoRef = database.ref("Menu/"+IdMenu+"/productos").child(ID);
     todoRef.remove();
     //listarItems();
   };
 
-  const [productosVisbles, setProductosVisbles] = useState(false);
-  const [IdMenu, setIdMenu] = useState("");
-
-  const agregarProductos = (idMenu) => {
-    setProductosVisbles(true);
-    setIdMenu(idMenu);
+  const regresaMenu = () => {
+      setProductosVisbles(false);
   }
-
   
   return (
-    productosVisbles ? (
-      <AddProducto setProductosVisbles={setProductosVisbles} IdMenu={IdMenu} setIdMenu={setIdMenu}></AddProducto>
-    ) : (
-      <View style={styles.container}>
+    <View style={styles.container}>
     <View
-      style={styles.cabecera}
+      
     >
       <View
         style={{
-          width: "15%",
+          width: "100%",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 20, color: "white" }}>Nuevo Menu:</Text>
+        <Text style={{ fontSize: 20, color: "white" }}>Nuevo Producto:</Text>
       </View>
 
       <View
         style={{
-          width: "75%",
+          width: "70%",
           justifyContent: "center",
         }}
       >
         <StyledInput
-          placeholder="Ingresar tarea nueva"
+          placeholder="Ingresar nuevo producto"
           onChangeText={(text) => setTitulo(text)}
           value={titulo}
+        />
+      </View>
+      <View
+        style={{
+          width: "30%",
+          justifyContent: "center",
+        }}
+      >
+        <StyledInput
+          placeholder="Precio"
+          onChangeText={(text) => setPrecio(text)}
+          value={precio}
+          keyboardType={'numeric'}
         />
       </View>
 
       <View
         style={{
-          width: "10%",
+          width: "100%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -114,11 +120,21 @@ import 'firebase/storage';
         >
           <Image source={require("../../media/icons/add.png")} />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> regresaMenu()}
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+            <Text>Atras</Text>
+          {/*<Image source={require("../../media/icons/add.png")} />*/}
+        </TouchableOpacity>
       </View>
     </View>
     <StyledView special1>
       <ScrollView>
-      {listar.length === 0 ? (<Text style={styles.textoListaVacia}>No hay menús para mostrar</Text>) : 
+      {listar.length === 0 ? (<Text style={styles.textoListaVacia}>No hay productos en el menu</Text>) : 
       (
         listar?.map((item) => (
           <View key={item.id}
@@ -126,29 +142,23 @@ import 'firebase/storage';
             >
                 <View
                 style={{
-                    width: "60%",
+                    width: "55%",
                     height: 50,
                     justifyContent: "center",
                 }}
                 >
-                <StyledTextoLista onPress={()=>agregarProductos(item.id)}>{item.Titulo}</StyledTextoLista>
+                <StyledTextoLista>{item.Titulo}</StyledTextoLista>
                 </View>
 
                 <View
                 style={{
-                    width: "20%",
+                    width: "25%",
                     height: 50,
                     justifyContent: "center",
                     alignItems: "center",
                 }}
                 >
-                <TouchableOpacity onPress={()=>agregarProductos(item.id)}>
-                  <Text>+Producto</Text>
-                  {/*<Image
-                source={{ uri: pickedImagePath }}
-                style={styles.usrPic}
-                  />*/}
-                  </TouchableOpacity>
+                <StyledTextoLista>$ {item.Precio}</StyledTextoLista>
                 
                 </View>
 
@@ -167,8 +177,7 @@ import 'firebase/storage';
       </ScrollView>
     </StyledView>
   </View>
-    )
-    
+
   );
 };
-export default addMenuScreen;
+export default addProductoScreen;

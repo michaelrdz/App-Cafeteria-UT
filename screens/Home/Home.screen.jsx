@@ -5,6 +5,7 @@ import ToDoScreen from "../../screens/ToDo";
 import UserScreen from "../../screens/User";
 import AddMenuScreen from "../../screens/addMenu";
 import AdminPedidosScreen from "../../screens/AdminPedidos";
+import UserMenuScreen from "../UserMenu/";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -48,6 +49,8 @@ const HomePage = () => {
       //setUserName(snapshot.val().Nombre)
     });
   };
+
+  //PONER Almacenamiento en codigo del pedido
 
   useEffect(()=> {
     ConsultaBD();
@@ -105,7 +108,7 @@ const HomePage = () => {
         tabBarInactiveTintColor: "#f18698",
         tabBarActiveTintColor: "grey"
       })}>
-        <Tab.Screen name="Menu" children={()=> <ToDoScreen />} />
+        <Tab.Screen name="Menu" children={()=> <UserMenuScreen />} />
         <Tab.Screen name="Usuario" children={()=> <UserScreen />} />
       </Tab.Navigator>
     )

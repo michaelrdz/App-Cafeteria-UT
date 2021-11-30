@@ -18,7 +18,7 @@ import 'firebase/storage';
       listarItems();
     }, []);
 
-    // Nuevo Item
+    // * Nuevo Item
   const crearItem = () => {
     try {
       if (titulo.length > 0) {

@@ -23,7 +23,7 @@ export const StyledText = styled.Text`
 `;
 
 export const StyledInput = styled.TextInput`
-  height: 50px;
+  height: 40px;
   width: 95%;
   margin: 12px;
   padding: 10px;
@@ -53,7 +53,7 @@ export const StyledViewLista = styled.View`
 
 export const StyledTextoLista = styled.Text`
   padding: 10px;
-  margin-Top: 6px;
+  margin-Top: 2px;
   font-Size: 17px;
   font-Weight: bold;
   color: black;

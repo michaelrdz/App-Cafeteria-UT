@@ -6,6 +6,7 @@ import UserScreen from "../../screens/User";
 import AddMenuScreen from "../../screens/addMenu";
 import AdminPedidosScreen from "../../screens/AdminPedidos";
 import UserMenuScreen from "../UserMenu/";
+import UserPedidosScreen from "../UserPedidos";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -49,8 +50,9 @@ const HomePage = () => {
       //setUserName(snapshot.val().Nombre)
     });
   };
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
   //PONER Almacenamiento en codigo del pedido
+  const [perdidoCarritos, setPerdidoCarritos] = useState([]);
 
   useEffect(()=> {
     ConsultaBD();
@@ -89,7 +91,7 @@ const HomePage = () => {
       </Tab.Navigator>
     ) :
     (
-      <Tab.Navigator 
+      <Tab.Navigator  
       screenOptions={({route})=>({
         tabBarIcon:({focused, color, size})=> {
           let iconName;
@@ -98,6 +100,8 @@ const HomePage = () => {
             iconName = focused 
             ? "ios-list"
             : "ios-list-outline"
+          }else if(route.name === "Pedidos"){
+            iconName = "cart-outline"
           }else if(route.name === "Usuario"){
             iconName = focused 
             ? "person-circle"
@@ -108,7 +112,8 @@ const HomePage = () => {
         tabBarInactiveTintColor: "#f18698",
         tabBarActiveTintColor: "grey"
       })}>
-        <Tab.Screen name="Menu" children={()=> <UserMenuScreen />} />
+        <Tab.Screen name="Menu" children={()=> <UserMenuScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
+        <Tab.Screen name="Pedidos" children={()=> <UserPedidosScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
         <Tab.Screen name="Usuario" children={()=> <UserScreen />} />
       </Tab.Navigator>
     )

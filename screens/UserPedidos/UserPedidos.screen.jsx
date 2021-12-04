@@ -7,13 +7,14 @@ import {
   Image,
   Button,
   ScrollView,
+  Alert
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import usrPic from "../../media/images/usr_profpic.png";
 import ImagePickerScreen from "../ImgPicker";
 import { estilosUsuario as styles } from "../../styles/estilosUsuario";
 import Icon from "react-native-vector-icons/Ionicons";
-
+import i18n from "../../localization/i18n";
 import { auth, database, firebase } from "../../firebase";
 import "firebase/storage";
 import { StyledTouchableOpacity } from "../../styles/StyledComp";
@@ -52,13 +53,13 @@ const UserPedidosScreen = (props) => {
   // Cambiar cantidad
   function cambiaCantidad(prdID, precio, cant, op) {
     let eliminaPrd = false;
-    console.log("cambiando cantidad");
+    //console.log("cambiando cantidad");
     let newCantidad
     if(op === "sum"){
       //console.log("sumando");
       newCantidad = cant+1;
     }else {
-      console.log("Restando, cantidad: "+cant);
+      //console.log("Restando, cantidad: "+cant);
       if(cant=="1"){
         //console.log("Eliminando");
         eliminaPrd = true;
@@ -72,7 +73,7 @@ const UserPedidosScreen = (props) => {
       eliminarItem(prdID);
     }else {
       let newTotal =  parseFloat(newCantidad) * parseFloat(precio);
-      console.log("actualiza cant - newTotal: "+newTotal);
+      //console.log("actualiza cant - newTotal: "+newTotal);
       let updatePC = props.PC?.map(item => {
         if(item.id == prdID) {
           return {...item, Cantidad: newCantidad, Total: newTotal}
@@ -84,20 +85,50 @@ const UserPedidosScreen = (props) => {
     }
   }
 
+  const vaciarCarrito = () => {
+    Alert.alert(
+      i18n.t("UserPedidos").alertEliminarTit,
+      i18n.t("UserPedidos").alertEliminarMsg,
+      [
+        {text: i18n.t("UserPedidos").alertEliminarSi, onPress: () => 
+        props.SetPC([])
+      },
+        {text: i18n.t("UserPedidos").alertEliminarNo, onPress: () => console.log("usuario cancelo eliminar"), style: "cancel"},
+      ],
+      {
+        cancelable: true
+      }
+    );
+  }
+
   // Nuevo Item
   const crearItem = () => {
-    try {
-      if (props.PC.length > 0) {
-        const todoRef = database.ref("Pedidos");
-        todoRef.push(perdidosPago);
-        //console.log(perdidosPago);
-        props.SetPC([]);
-      } else {
-        alert("No hay ventas en el pedido");
+    Alert.alert(
+      i18n.t("UserPedidos").alertConfirmarTit,
+      i18n.t("UserPedidos").alertConfirmarMsg,
+      [
+        {text: i18n.t("UserPedidos").alertEliminarSi, onPress: () => {
+        try {
+          if (props.PC.length > 0) {
+            const todoRef = database.ref("Pedidos");
+            todoRef.push(perdidosPago);
+            //console.log(perdidosPago);
+            props.SetPC([]);
+            alert(i18n.t("UserPedidos").alertEnvio);
+          } else {
+            alert(i18n.t("UserPedidos").alertVacio);
+          }
+        } catch (error) {
+          alert(i18n.t("UserPedidos").alertVacio);
+        }
       }
-    } catch (error) {
-      alert("No hay ventas en el pedido");
-    }
+      },
+        {text: i18n.t("UserPedidos").alertEliminarNo, onPress: () => console.log("usuario cancelo eliminar"), style: "cancel"},
+      ],
+      {
+        cancelable: true
+      }
+    );
   };
 
   return (
@@ -117,7 +148,7 @@ const UserPedidosScreen = (props) => {
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
-            Producto
+          {i18n.t("UserPedidos").Producto}
           </Text>
         </View>
 
@@ -129,7 +160,7 @@ const UserPedidosScreen = (props) => {
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
-            Cant.
+          {i18n.t("UserPedidos").Cant}
           </Text>
         </View>
 
@@ -141,7 +172,7 @@ const UserPedidosScreen = (props) => {
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
-            Precio
+          {i18n.t("UserPedidos").Precio}
           </Text>
         </View>
 
@@ -153,7 +184,7 @@ const UserPedidosScreen = (props) => {
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
-            Total
+          {i18n.t("UserPedidos").Totales}
           </Text>
         </View>
       </View>
@@ -167,7 +198,7 @@ const UserPedidosScreen = (props) => {
         <ScrollView>
           {props.PC.length === 0 ? (
             <Text style={styles.textoListaVacia}>
-              No hay venta en el pedido
+              {i18n.t("AdminPedidos").NoProductos}
             </Text>
           ) : (
             props.PC?.map((item) => (
@@ -266,29 +297,21 @@ const UserPedidosScreen = (props) => {
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
-            Totales
+          {i18n.t("UserPedidos").Total}
           </Text>
         </View>
 
         <View
           style={{
-            width: "5%",
+            width: "25%",
             justifyContent: "center",
-            alignItems: "flex-end",
+            alignItems: "center",
+            flexDirection: "row",
           }}
         >
           <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>
             $
           </Text>
-        </View>
-
-        <View
-          style={{
-            width: "20%",
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}
-        >
           <Text style={{ fontSize: 20, color: "black" }}>
             {ObtnerTotales()}
           </Text>
@@ -298,6 +321,7 @@ const UserPedidosScreen = (props) => {
       <View
         style={{
           flexDirection: "row",
+          alignItems: "flex-start",
           backgroundColor: "#d4cece",
           height: 100,
         }}
@@ -311,7 +335,7 @@ const UserPedidosScreen = (props) => {
         >
           <StyledTouchableOpacity
             cambiarSpecial
-            onPress={() => props.SetPC([])}
+            onPress={() => vaciarCarrito()}
           >
             <View
               style={{
@@ -328,7 +352,7 @@ const UserPedidosScreen = (props) => {
                   paddingRight: "15%",
                 }}
               >
-                Cancelar
+                {i18n.t("UserPedidos").btnCancelar}
               </Text>
               <Image source={require("../../media/icons/cancelar.png")} />
             </View>
@@ -358,7 +382,7 @@ const UserPedidosScreen = (props) => {
                   paddingRight: "15%",
                 }}
               >
-                Confirmar
+                {i18n.t("UserPedidos").btnConfirmar}
               </Text>
               <Image source={require("../../media/icons/pago.png")} />
             </View>

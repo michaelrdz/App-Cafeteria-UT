@@ -5,6 +5,7 @@ import { estilosLogin as styles } from "../../styles/estilosLogin";
 import { auth } from "../../firebase";
 import logo from "../../media/images/ToDo_logo.png";
 import SingUpScreen from "../SignUp";
+import i18n from "../../localization/i18n";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -63,13 +64,13 @@ const LoginPage = () => {
       <View style={styles.inputContainer}>
         <Image source={logo} style={styles.logo} />
         <TextInput
-          placeholder="Email"
+          placeholder={i18n.t("LoginScreen").emailLabel}
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.input}
         />
         <TextInput
-          placeholder="Password"
+          placeholder={i18n.t("LoginScreen").PassLabel}
           value={pwd}
           onChangeText={(text) => setPwd(text)}
           style={styles.input}
@@ -78,13 +79,17 @@ const LoginPage = () => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>
+            {i18n.t("LoginScreen").btnLogin}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={nuevoUsuario}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Nuevo Usuario</Text>
+          <Text style={styles.buttonOutlineText}>
+            {i18n.t("LoginScreen").btnSignUp}
+          </Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>)

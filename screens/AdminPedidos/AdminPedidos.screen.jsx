@@ -12,6 +12,7 @@ import { StyledView, StyledTextoLista, StyledInput } from "../../styles/StyledCo
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import AdminVerPedido from "../AdminVerPedido";
+import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
 import "firebase/storage";
 
@@ -59,11 +60,39 @@ const addMenuScreen = ({}) => {
     ):
     (
     <View style={styles.container}>
+      <View style={{
+                   flexDirection: "row"
+                }}>
+      <View style={{
+                    width: "70%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminPedidos").Folio}</Text>
+                </View>
+                <View style={{
+                    width: "15%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminPedidos").Total}</Text>
+                  </View>
+                  <View style={{
+                    width: "15%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminPedidos").Detalles}</Text>
+                  </View>
+    </View>
     <StyledView special1>
       <ScrollView>
         {listar.length === 0 ? (
           <Text style={styles.textoListaVacia}>
-            No hay productos para mostrar
+            {i18n.t("AdminPedidos").NoProductos}
           </Text>
         ) : (
           

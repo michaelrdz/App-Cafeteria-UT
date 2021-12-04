@@ -16,6 +16,7 @@ import {
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import Icon from "react-native-vector-icons/Ionicons";
+import i18n from "../../localization/i18n";
 import "firebase/storage";
 
 const UserListaProductosScreen = ({
@@ -85,14 +86,29 @@ const UserListaProductosScreen = ({
         <ScrollView>
           {listar.length === 0 ? (
             <Text style={styles.textoListaVacia}>
-              No hay productos en el menu
+              {i18n.t("AdminPedidos").NoProductos}
             </Text>
           ) : (
             listar?.map((item) => (
               <View key={item.id} style={styles.filaLista}>
                 <View
                   style={{
-                    width: "50%",
+                    width: "40%",
+                    height: 40,
+                    justifyContent: "center",
+                  }}
+                >
+                    <Image
+                      source={{ uri: item.imgUri }}
+                      style={{
+                        width:"100%",
+                        height: 50
+                    }}
+                      />
+                </View>
+                <View
+                  style={{
+                    width: "30%",
                     height: 40,
                     justifyContent: "center",
                   }}
@@ -110,22 +126,10 @@ const UserListaProductosScreen = ({
                 >
                   <StyledTextoLista>$ {item.Precio}</StyledTextoLista>
                 </View>
-                {/*<View
-                  style={{
-                    width: "20%",
-                    justifyContent: "center",
-                  }}
-                >
-                  <StyledInput
-                    placeholder="1"
-                    value={cantidad}
-                    keyboardType={"numeric"}
-                  />
-                </View>*/}
 
                 <View
                   style={{
-                    width: "20%",
+                    width: "10%",
                     height: 50,
                     justifyContent: "center",
                     alignItems: "center",
@@ -142,7 +146,6 @@ const UserListaProductosScreen = ({
                         1,
                         item.Precio,
                         item.Precio
-                        //parseInt(1, 10) * parseInt(item.Precio, 10)
                       )
                     }
                   />

@@ -1,0 +1,87 @@
+{
+    "LoginScreen": {
+        "emailLabel": "Email",
+        "PassLabel": "Password",
+        "btnLogin": "Sign In",
+        "btnSignUp": "Sign Up"
+    },
+    "SignUpScreen": {
+        "NombreLabel": "Full name",
+        "emailLabel": "Email",
+        "PassLabel": "Password",
+        "matriculaLabel": "Student ID",
+        "btnReg": "Sign Up",
+        "btnCancel": "Go Back",
+        "alertVacio": "All fields are required"
+    },
+    "HomeScreen": {
+        "Menu": "Menu",
+        "Ordenes": "Orders",
+        "Usuario": "User",
+        "Pedidos": "Orders"
+    },
+    "AddMenuScreen": {
+        "NuevoMenu": "Add Menu",
+        "NuevoMenuLabel": "New menu title",
+        "AlertTitulo": "Put a title  for menu"
+    },
+    "AddProductoScreen": {
+        "titulo": "Add product",
+        "AddProducto": "New Product name",
+        "Precio": "Price",
+        "Imagen": "Image",
+        "Detalles": "Details",
+        "Eliminar": "Drop",
+        "AlertAdd": "Put title / price"
+    },
+    "AdminPedidos": {
+        "NoProductos": "No elements to list",
+        "Folio": "Order",
+        "Total": "Total",
+        "Detalles": "Details"
+    },
+    "AdminVerPedido": {
+        "Orden": "Order: ",
+        "Matricula": "Student ID",
+        "Producto": "Product",
+        "Cantidad": "Sum",
+        "Totales": "Amount",
+        "Total": "Order sumary:",
+        "btnEliminar": "Drop Order",
+        "btnAtender": "Order Attended"
+    },
+    "UserMenu": {
+        "productos": "See products",
+        "alertAgregado": "Product added",
+        "alertActualizado": "Order updated"
+    },
+    "UserPedidos": {
+        "PedidosVacio": "No orders to list",
+        "Producto": "Product",
+        "Cant": "Sum",
+        "Precio": "Price",
+        "Totales": "Amount",
+        "Total": "Order sumary",
+        "btnCancelar": "Cancel",
+        "btnConfirmar": "Send order",
+        "alertEliminarTit": "Delete order",
+        "alertEliminarMsg": "Do you want to cancel order?",
+        "alertEliminarSi": "Yes",
+        "alertEliminarNo": "No",
+        "alertConfirmarTit": "Confirm order",
+        "alertConfirmarMsg": "Do you want to send your order?",
+        "alertEnvio": "Order received successfully",
+        "alertVacio": "there is no products on your order!"
+    },
+    "userScreen": {
+        "nombre": "Name:",
+        "sesion": "Logout",
+        "matricula": "ID:"
+    },
+    "ImagePickerScreen": {
+        "Galeria": "Open gallery",
+        "Camara": "Open camera",
+        "Cancelar": "Go back",
+        "Refuse": "You've refused to allow this appp to access your photos!"
+    }
+}

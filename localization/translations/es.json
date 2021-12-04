@@ -1,0 +1,87 @@
+{
+    "LoginScreen": {
+        "emailLabel": "Correo electrónico",
+        "PassLabel": "Contraseña",
+        "btnLogin": "Iniciar Sesión",
+        "btnSignUp": "Nuevo Usuario"
+    },
+    "SignUpScreen": {
+        "NombreLabel": "Nombre completo",
+        "emailLabel": "Correo electrónico",
+        "PassLabel": "Contraseña",
+        "matriculaLabel": "Matrícula",
+        "btnReg": "Registrarse",
+        "btnCancel": "Cancelar",
+        "alertVacio": "Todos los campos son obligatorios"
+    },
+    "HomeScreen": {
+        "Menu": "Menú",
+        "Ordenes": "Ordenes",
+        "Usuario": "Usuario",
+        "Pedidos": "Pedidos"
+    },
+    "AddMenuScreen": {
+        "NuevoMenu": "Nuevo Menú",
+        "NuevoMenuLabel": "Nombre del menú",
+        "AlertTitulo": "Ingresar un título"
+    },
+    "AddProductoScreen": {
+        "titulo": "Nuevo producto",
+        "AddProducto": "Ingresar nuevo producto",
+        "Precio": "Precio",
+        "Imagen": "Imagen",
+        "Detalles": "Detalles",
+        "Eliminar": "Eliminar",
+        "AlertAdd": "Ingresar título / precio"
+    },
+    "AdminPedidos": {
+        "NoProductos": "No hay elementos para mostrar",
+        "Folio": "Folio",
+        "Total": "Total",
+        "Detalles": "Detalles"
+    },
+    "AdminVerPedido": {
+        "Orden": "Orden:",
+        "Matricula": "Matricula",
+        "Producto": "Producto",
+        "Cantidad": "Cant",
+        "Totales": "Total",
+        "Total": "Total del pedido:",
+        "btnEliminar": "Eliminar Pedido",
+        "btnAtender": "Orden Atendida"
+    },
+    "UserMenu": {
+        "productos": "Ver productos",
+        "alertAgregado": "Producto agregado a su pedido",
+        "alertActualizado": "Pedido actualizado"
+    },
+    "UserPedidos": {
+        "PedidosVacio": "No hay pedidos para mostrar",
+        "Producto": "Producto",
+        "Cant": "Cant",
+        "Precio": "Precio",
+        "Totales": "Totales",
+        "Total": "Total",
+        "btnCancelar": "Cancelar",
+        "btnConfirmar": "Confirmar",
+        "alertEliminarTit": "Eliminar pedido",
+        "alertEliminarMsg": "¿Quiere vaciar su orden?",
+        "alertEliminarSi": "Sí",
+        "alertEliminarNo": "No",
+        "alertConfirmarTit": "Confirmar pedido",
+        "alertConfirmarMsg": "¿Quiere enviar su orden?",
+        "alertEnvio": "Pedido enviado con éxito",
+        "alertVacio": "No hay productos en su orden"
+    },
+    "userScreen": {
+        "nombre": "Nombre:",
+        "sesion": "Cerrar sesión",
+        "matricula": "Matrícula:"
+    },
+    "ImagePickerScreen": {
+        "Galeria": "Abrir galería",
+        "Camara": "Abrir camara",
+        "Cancelar": "Cancelar",
+        "Refuse": "Sin permisos no se podrá acceder a sus imagenes"
+    }
+}

@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/core";
 import usrPic from "../../media/images/usr_profpic.png";
 import ImagePickerScreen from "../ImgPicker";
 import { estilosUsuario as styles } from "../../styles/estilosUsuario";
+import i18n from "../../localization/i18n";
 
 import { auth, database, firebase } from "../../firebase";
 import 'firebase/storage';
@@ -29,6 +30,7 @@ const UserScreen = ({}) => {
   /*DATOS DE LA BD*/
 
   const [userName, setUserName] = useState('');
+  const [matricula, setMatricula] = useState('');
 
   const ConsultaBD = () => {
     const todoRef = database
@@ -36,7 +38,8 @@ const UserScreen = ({}) => {
     .once('value')
     .then(snapshot => {
       console.log('User info: ', snapshot.val().Nombre);
-      setUserName(snapshot.val().Nombre)
+      setUserName(snapshot.val().Nombre);
+      setMatricula(snapshot.val().Matricula);
     });
 
   };
@@ -88,11 +91,12 @@ const UserScreen = ({}) => {
             onPress={cambiarFoto}
             /></TouchableOpacity>
            }
-          <Text style={styles.textoUsuario}>Nombre: {userName}</Text>
+          <Text style={styles.textoUsuario}>{i18n.t("userScreen").nombre} {userName}</Text>
           <Text style={styles.textoCorreo}>{auth.currentUser?.email}</Text>
+          <Text style={styles.textoCorreo}>{i18n.t("userScreen").matricula} {matricula}</Text>
           
           <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-            <Text style={styles.buttonText}>Cerrar sesión</Text>
+            <Text style={styles.buttonText}>{i18n.t("userScreen").sesion}</Text>
           </TouchableOpacity>
       </View>
     </View>

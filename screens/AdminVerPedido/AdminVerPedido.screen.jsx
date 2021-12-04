@@ -17,6 +17,7 @@ import {
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import { StyledTouchableOpacity } from "../../styles/StyledComp";
+import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
 import "firebase/storage";
 
@@ -56,8 +57,10 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Orden: {IdPedido}</Text>
+      <View style={{
+                   flexDirection: "row"
+                }}>
+        <Text>{i18n.t("AdminVerPedido").Orden} {IdPedido}</Text>
         <TouchableOpacity
             onPress={() => regresaPedidosLst()}
             style={{
@@ -68,11 +71,39 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
             <Icon name="arrow-back-outline" size={34} color="green" />
           </TouchableOpacity>
       </View>
+      <View style={{
+                   flexDirection: "row"
+                }}>
+      <View style={{
+                    width: "70%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminVerPedido").Producto}</Text>
+                </View>
+                <View style={{
+                    width: "15%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminVerPedido").Cantidad}</Text>
+                  </View>
+                  <View style={{
+                    width: "15%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminVerPedido").Totales}</Text>
+                  </View>
+    </View>
       <StyledView special1>
       <ScrollView>
         {listar.length === 0 ? (
           <Text style={styles.textoListaVacia}>
-            No hay pedidos para mostrar
+            {i18n.t("AdminPedidos").NoProductos}
           </Text>
         ) : (
         listar?.map((lista) => (
@@ -107,7 +138,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
       </ScrollView>
     </StyledView>
     <View>
-      <Text>Total del pedido: {totalPedido}</Text>
+      <Text>{i18n.t("AdminVerPedido").Total} {totalPedido}</Text>
     </View>
     <View style={{
           flexDirection: "row",
@@ -140,7 +171,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
                   paddingRight: "15%",
                 }}
               >
-                Eliminar Pedido
+                {i18n.t("AdminVerPedido").btnEliminar}
               </Text>
               <Image source={require("../../media/icons/cancelar.png")} />
             </View>
@@ -170,7 +201,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
                   paddingRight: "15%",
                 }}
               >
-                Orden Atendida
+                {i18n.t("AdminVerPedido").btnAtender}
               </Text>
               <Image source={require("../../media/icons/pago.png")} />
             </View>

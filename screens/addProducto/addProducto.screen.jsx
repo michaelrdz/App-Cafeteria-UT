@@ -4,6 +4,7 @@ import { StyledView, StyledTextoLista, StyledInput } from "../../styles/StyledCo
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import ImgPickFoodScreen from "../ImgPickFood";
+import i18n from "../../localization/i18n";
 import Icon from 'react-native-vector-icons/Ionicons';
 import 'firebase/storage';
 
@@ -14,15 +15,10 @@ import 'firebase/storage';
     const [precio, setPrecio] = useState();
     const [listar, setListar] = useState([]);
 
-    /*useEffect(() => {
-      console.log("Listando");
-      listarItems();
-    }, []);*/
-
-    //* Nuevo Item
+    // Nuevo Item
   const crearItem = () => {
     try {
-      if (titulo.length > 0) {
+      if (titulo.length > 0 && precio.length >0) {
         const todoRef = database.ref("Menu/"+IdMenu+"/productos");
         item.Titulo = titulo;
         item.Precio = precio;
@@ -30,11 +26,12 @@ import 'firebase/storage';
         //console.log(item);
         //listarItems();
         setTitulo(null);
+        setPrecio(null);
       } else {
-        alert("Ingresar un título");
+        alert(i18n.t("AddProductoScreen").AlertAdd);
       }
     } catch (error) {
-      alert("Ingresar un título");
+      alert(i18n.t("AddProductoScreen").AlertAdd);
     }
   };
   
@@ -74,7 +71,7 @@ import 'firebase/storage';
   }
 
   useEffect(() => {
-    console.log("Listando");
+    //console.log("Listando");
     listarItems();
   }, [PickerVisible]);
 
@@ -85,22 +82,43 @@ import 'firebase/storage';
   return (
     !PickerVisible ? ( 
     <View style={styles.container}>
-    <View
-      
-    >
+      <View style={{
+                   flexDirection: "row"
+                }}>
       <View
         style={{
-          width: "100%",
+          width: "20%",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Text style={{ fontSize: 20, color: "white" }}>Nuevo Producto:</Text>
+        <TouchableOpacity
+          onPress={()=> regresaMenu()}
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+            <Icon name="arrow-forward-circle-outline" size={34} color="green" />
+        </TouchableOpacity>
       </View>
-
       <View
         style={{
-          width: "70%",
+          width: "80%",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+        }}
+      >
+        <Text style={{ fontSize: 20, color: "black" }}>Nuevo Producto:</Text>
+      </View>
+      </View>
+    <View style={{
+                   flexDirection: "row"
+                }}
+    >
+      <View
+        style={{
+          width: "60%",
           justifyContent: "center",
         }}
       >
@@ -112,7 +130,7 @@ import 'firebase/storage';
       </View>
       <View
         style={{
-          width: "30%",
+          width: "20%",
           justifyContent: "center",
         }}
       >
@@ -126,7 +144,7 @@ import 'firebase/storage';
 
       <View
         style={{
-          width: "100%",
+          width: "20%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -140,27 +158,47 @@ import 'firebase/storage';
         >
           <Image source={require("../../media/icons/add.png")} />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={()=> regresaMenu()}
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-            <Text>Atras</Text>
-          {/*<Image source={require("../../media/icons/add.png")} />*/}
-        </TouchableOpacity>
       </View>
+    </View>
+    <View style={{
+                   flexDirection: "row"
+                }}>
+      <View style={{
+                    width: "40%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AddProductoScreen").Imagen}</Text>
+                </View>
+                <View style={{
+                    width: "35%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AddProductoScreen").Detalles}</Text>
+                  </View>
+                  <View style={{
+                    width: "15%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AddProductoScreen").Eliminar}</Text>
+                  </View>
     </View>
     <StyledView special1>
       <ScrollView>
-      {listar.length === 0 ? (<Text style={styles.textoListaVacia}>No hay productos en el menu</Text>) : 
+      {listar.length === 0 ? (<Text style={styles.textoListaVacia}>
+        {i18n.t("AdminPedidos").NoProductos}
+      </Text>) : 
       (
         listar?.map((item) => (
           <View key={item.id}
                 style={styles.filaLista} >
                   <View style={{
-                    width: "25%",
+                    width: "40%",
                     height: 50,
                     justifyContent: "center",
                 }}>
@@ -168,7 +206,7 @@ import 'firebase/storage';
                     <Image
                       source={{ uri: item.imgUri }}
                       style={{
-                        width: 32,
+                        width:"100%",
                         height: 32
                     }}
                       />
@@ -176,8 +214,8 @@ import 'firebase/storage';
                 </View>
                 <View
                 style={{
-                    width: "25%",
-                    height: 50,
+                    width: "50%",
+                    height: 60,
                     justifyContent: "center",
                 }}
                 >
@@ -186,7 +224,7 @@ import 'firebase/storage';
                 </View>
                 <View
                 style={{
-                    width: "25%",
+                    width: "10%",
                     height: 50,
                     justifyContent: "center",
                     alignItems: "center",

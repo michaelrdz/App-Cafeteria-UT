@@ -16,6 +16,7 @@ import {
 import UserListaProductos from "../UserListaProductos";
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
+import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
 import "firebase/storage";
 
@@ -55,22 +56,20 @@ const UserMenuScreen = (props) => {
     let newPrd = true;
     let updatePC = props.PC?.map(item => {
       if(item.id == prdID) {
-        console.log("Producto ya esta en carrito");
         let newCant = item.Cantidad + 1;
-        console.log("nueva cantidad: "+newCant);
-        console.log(item.Total+"+"+prec+"=")
+        //console.log("nueva cantidad: "+newCant);
         let newTotal = parseFloat(item.Total) + parseFloat(prec);
-        console.log("nuevo Total: "+newTotal);
+        //console.log("nuevo Total: "+newTotal);
         newPrd = false;
         return {...item, Cantidad: newCant, Total: newTotal}
       } else {
         return item;
       }
     });
-    console.log(updatePC);
+    //console.log(updatePC);
 
     if(newPrd) {
-      console.log("Nuevo producto");
+      //Agregando nuevo producto
       props.SetPC([
         ...props.PC,
         {
@@ -81,10 +80,11 @@ const UserMenuScreen = (props) => {
           Total: parseFloat(total),
         },
       ]);
+      alert(i18n.t("UserMenu").alertAgregado);
     }else {
-      console.log("Actualizando productos editados");
+      //Actualizando productos
       props.SetPC(updatePC);
-      console.log(props.PC);
+      alert(i18n.t("UserMenu").alertActualizado);
     }
   };
 
@@ -101,14 +101,27 @@ const UserMenuScreen = (props) => {
         <ScrollView>
           {listar.length === 0 ? (
             <Text style={styles.textoListaVacia}>
-              No hay menús para mostrar
+              {i18n.t("AdminPedidos").NoProductos}
             </Text>
           ) : (
             listar?.map((item) => (
               <View key={item.id} style={styles.filaLista}>
+                <View style={{
+                    width: "30%",
+                    height: 50,
+                    justifyContent: "center",
+                  }}>
+                      <Image
+                        source={{ uri: item.imgUri }}
+                        style={{
+                          width: 100,
+                          height: 50
+                      }}
+                        />
+                </View>
                 <View
                   style={{
-                    width: "60%",
+                    width: "50%",
                     height: 50,
                     justifyContent: "center",
                   }}
@@ -120,7 +133,7 @@ const UserMenuScreen = (props) => {
 
                 <View
                   style={{
-                    width: "40%",
+                    width: "20%",
                     height: 50,
                     justifyContent: "center",
                     alignItems: "center",
@@ -129,11 +142,7 @@ const UserMenuScreen = (props) => {
                   <TouchableOpacity
                     onPress={() => elegirProductos(item.id)}
                   >
-                    <Text>Ver mas Producto</Text>
-                    {/*<Image
-                source={{ uri: pickedImagePath }}
-                style={styles.usrPic}
-                  />*/}
+                    <Icon name="arrow-forward-circle-outline" size={34} color="green" />
                   </TouchableOpacity>
                 </View>
               </View>

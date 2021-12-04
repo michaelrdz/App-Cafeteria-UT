@@ -10,6 +10,7 @@ import UserPedidosScreen from "../UserPedidos";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import i18n from "../../localization/i18n";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +54,9 @@ const HomePage = () => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
   //PONER Almacenamiento en codigo del pedido
   const [perdidoCarritos, setPerdidoCarritos] = useState([]);
-
+  const [txtMenu, setTxtMenu] = useState(i18n.t("HomeScreen").Menu);
+  const [txtPedidos, setTxtPedidos] = useState(i18n.t("HomeScreen").Pedidos);
+  const [txtUsuario, setTxtUsuario] = useState(i18n.t("HomeScreen").Usuario);
   useEffect(()=> {
     ConsultaBD();
   }, []);
@@ -66,15 +69,15 @@ const HomePage = () => {
         tabBarIcon:({focused, color, size})=> {
           let iconName;
 
-          if(route.name === "Menu") {
+          if(route.name === txtMenu) {
+            iconName = focused 
+            ? "fast-food"
+            : "fast-food-outline"
+          }else if(route.name === txtPedidos){
             iconName = focused 
             ? "ios-list"
             : "ios-list-outline"
-          }else if(route.name === "Pedidos"){
-            iconName = focused 
-            ? "person-circle"
-            : "person-circle-outline"
-          }else if(route.name === "Usuario"){
+          }else if(route.name === txtUsuario){
             iconName = focused 
             ? "person-circle"
             : "person-circle-outline"
@@ -85,9 +88,9 @@ const HomePage = () => {
         tabBarInactiveTintColor: "#f18698",
         tabBarActiveTintColor: "grey"
       })}>
-        <Tab.Screen name="Menu" children={()=> <AddMenuScreen />} />
-        <Tab.Screen name="Pedidos" children={()=> <AdminPedidosScreen />} />
-        <Tab.Screen name="Usuario" children={()=> <UserScreen />} />
+        <Tab.Screen name={txtMenu} children={()=> <AddMenuScreen />} />
+        <Tab.Screen name={txtPedidos} children={()=> <AdminPedidosScreen />} />
+        <Tab.Screen name={txtUsuario} children={()=> <UserScreen />} />
       </Tab.Navigator>
     ) :
     (
@@ -96,13 +99,13 @@ const HomePage = () => {
         tabBarIcon:({focused, color, size})=> {
           let iconName;
 
-          if(route.name === "Menu") {
+          if(route.name === txtMenu) {
             iconName = focused 
-            ? "ios-list"
-            : "ios-list-outline"
-          }else if(route.name === "Pedidos"){
+            ? "fast-food"
+            : "fast-food-outline"
+          }else if(route.name === txtPedidos){
             iconName = "cart-outline"
-          }else if(route.name === "Usuario"){
+          }else if(route.name === txtUsuario){
             iconName = focused 
             ? "person-circle"
             : "person-circle-outline"
@@ -112,9 +115,9 @@ const HomePage = () => {
         tabBarInactiveTintColor: "#f18698",
         tabBarActiveTintColor: "grey"
       })}>
-        <Tab.Screen name="Menu" children={()=> <UserMenuScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
-        <Tab.Screen name="Pedidos" children={()=> <UserPedidosScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
-        <Tab.Screen name="Usuario" children={()=> <UserScreen />} />
+        <Tab.Screen name={txtMenu} children={()=> <UserMenuScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
+        <Tab.Screen name={txtPedidos} children={()=> <UserPedidosScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
+        <Tab.Screen name={txtUsuario} children={()=> <UserScreen />} />
       </Tab.Navigator>
     )
   );

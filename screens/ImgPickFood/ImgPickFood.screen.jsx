@@ -15,13 +15,13 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
+      alert(i18n.t("ImagePickerScreen").Refuse);
       return;
     }
 
     const result = await ImagePicker.launchImageLibraryAsync();
 
-    //* Explore the result
+    // Explore the result
     console.log(result);
 
     if (!result.cancelled) {
@@ -55,7 +55,7 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your camera!");
+      alert(i18n.t("ImagePickerScreen").Refuse);
       return;
     }
 
@@ -145,23 +145,27 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
             onPress={showImagePicker}
             style={[styles.button]}
           >
-            <Text style={styles.buttonText}>Abrír Galería</Text>
+            <Text style={styles.buttonText}>
+              {i18n.t("ImagePickerScreen").Galeria}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={openCamera}
             style={[styles.button]}
           >
-            <Text style={styles.buttonText}>Abrír Cámara</Text>
+            <Text style={styles.buttonText}>
+            {i18n.t("ImagePickerScreen").Camara}
+            </Text>
           </TouchableOpacity>
-            {/*<Button style={styles.button} onPress={showImagePicker} title="Abrír Galería" />*/}
-            {/*<Button onPress={openCamera} title="Abrir Cámara" />*/}
           </View>
           <View>
           <TouchableOpacity
             onPress={volver}
             style={[styles.button, styles.buttonOutline]}
           >
-            <Text style={styles.buttonOutlineText}>Cancelar</Text>
+            <Text style={styles.buttonOutlineText}>
+              {i18n.t("ImagePickerScreen").Cancelar}
+            </Text>
           </TouchableOpacity>
           </View>
         </View>

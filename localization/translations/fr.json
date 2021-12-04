@@ -1,0 +1,87 @@
+{
+    "LoginScreen": {
+        "emailLabel": "E-mail",
+        "PassLabel": "Mot de passe",
+        "btnLogin": "Connexion",
+        "btnSignUp": "Nouvel utilisateur"
+    },
+    "SignUpScreen": {
+        "NombreLabel": "Nom complet",
+        "emailLabel": "E-mail",
+        "PassLabel": "Mot de passe",
+        "matriculaLabel": "Inscription",
+        "btnReg": "S'inscrire",
+        "btnCancel": "Annuler",
+        "alertVacio": "Tous les champs sont obligatoires"
+    },
+    "HomeScreen": {
+        "Menu": "Menu",
+        "Ordenes": "Ordre",
+        "Usuario": "Utilisateur",
+        "Pedidos": "Ordres"
+    },
+    "AddMenuScreen": {
+        "NuevoMenu": "Nouveau Menu",
+        "NuevoMenuLabel": "Nom du menu",
+        "AlertTitulo": "Entrez un titre"
+    },
+    "AddProductoScreen": {
+        "titulo": "Nouveau produit",
+        "AddProducto": "Entrez un nouveau produit",
+        "Precio": "Prix",
+        "Imagen": "Image",
+        "Detalles": "Détails",
+        "Eliminar": "Supprimer",
+        "AlertAdd": "Entrez le titre / le prix"
+    },
+    "AdminPedidos": {
+        "NoProductos": "Il n'y a aucun élément à afficher",
+        "Folio": "Folio",
+        "Total": "Total",
+        "Detalles": "Détails"
+    },
+    "AdminVerPedido": {
+        "Orden": "Ordre:",
+        "Matricula": "Identité ID",
+        "Producto": "Produit",
+        "Cantidad": "Quant",
+        "Totales": "Totaux",
+        "Total": "Total de la ordre:",
+        "btnEliminar": "Supprimer la ordre",
+        "btnAtender": "Ordre suivi"
+    },
+    "UserMenu": {
+        "productos": "Voir les produits",
+        "alertAgregado": "Produit ajouté à votre commande",
+        "alertActualizado": "Commande mise à jour"
+    },
+    "UserPedidos": {
+        "PedidosVacio": "Il n'y a aucune ordre à afficher",
+        "Producto": "Produit",
+        "Cant": "Cant",
+        "Precio": "Prix",
+        "Totales": "Totaux",
+        "Total": "Total",
+        "btnCancelar": "Annuler",
+        "btnConfirmar": "Confirmer",
+        "alertEliminarTit": "Supprimer la ordre",
+        "alertEliminarMsg": "Voulez-vous vider votre ordre ?",
+        "alertEliminarSi": "Oui",
+        "alertEliminarNo": "Non",
+        "alertConfirmarTit": "Confirmer ?",
+        "alertConfirmarMsg": "Voulez-vous envoyer votre ordre ?",
+        "alertEnvio": "Ordre envoyée avec succès",
+        "alertVacio": "Il n'y a aucun produit dans votre ordre"
+    },
+    "userScreen": {
+        "nombre": "Nombre:",
+        "sesion": "Fermer session",
+        "matricula": "Identité ID:"
+    },
+    "ImagePickerScreen": {
+        "Galeria": "Ouvrir la galerie",
+        "Camara": "Ouvrir la caméra",
+        "Cancelar": "Annuler",
+        "Refuse": "Sans autorisations, vous ne pourrez pas accéder à vos images"
+    }
+}

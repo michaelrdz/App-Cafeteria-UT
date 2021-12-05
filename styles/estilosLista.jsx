@@ -10,13 +10,27 @@ export const estilosLista = StyleSheet.create({
       },
     cabecera: {
         flexDirection: "row",
-        backgroundColor: COLORS.GrisFuerte,
-        height: 200,
+        backgroundColor: COLORS.AzulUT_dark,
+        height: 100,
+    },
+    cabeceraGrl: {
+        flexDirection: "row",
+        backgroundColor: COLORS.AzulUT_dark,
+        height: 100,
+    },
+    cabeceraLstPedidos: {
+        flexDirection: "row",
+        backgroundColor: COLORS.AzulUT_dark,
+        width: "100%",
+        height: 80,
+        alignItems: "center",
+        alignContent: "center"
     },
     textoListaVacia: {
-        color: COLORS.PrincipalPink,
+        color: COLORS.AzulUT_dark,
         fontWeight: "700",
         fontSize: 18,
+        top: 2,
     },
     filaLista: {
         flexDirection: "row",

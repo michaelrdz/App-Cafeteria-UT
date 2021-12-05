@@ -12,6 +12,7 @@ import {
   StyledView,
   StyledTextoLista,
   StyledInput,
+  StyledTouchableOpacityDrop
 } from "../../styles/StyledComp";
 
 import { auth, database } from "../../firebase";
@@ -21,14 +22,15 @@ import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
 import "firebase/storage";
 
-const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
+const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles, nomCliente, matricula}) => {
 
   const [listar, setListar] = useState([]);
+  //const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
     console.log("Listando");
     listarItems();
-  }, []);
+  }, [setProdVisbles]);
 
   // Consultar la informacion
   const listarItems = () => {
@@ -57,10 +59,11 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
 
   return (
     <View style={styles.container}>
-      <View style={{
-                   flexDirection: "row"
-                }}>
-        <Text>{i18n.t("AdminVerPedido").Orden} {IdPedido}</Text>
+      <View style={styles.cabeceraGrl}>
+        <View style={{
+          width: "12%",
+          justifyContent: "center",
+          alignItems: "center",}} >
         <TouchableOpacity
             onPress={() => regresaPedidosLst()}
             style={{
@@ -68,15 +71,31 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
               justifyContent: "flex-start",
             }}
           >
-            <Icon name="arrow-back-outline" size={34} color="green" />
+            <Icon name="arrow-back-outline" size={34} color="white" />
           </TouchableOpacity>
+        </View>
+        <View View style={{
+          width: "88%",
+          justifyContent: "center",
+          alignItems: "center",}} >
+            <View>
+              <Text style={{color: "white"}}>{i18n.t("AdminVerPedido").Orden} {IdPedido}</Text>
+            </View>
+            <View>
+              <Text style={{color: "white"}}>{i18n.t("AdminVerPedido").Nombre} {nomCliente}</Text>
+            </View>
+            <View>
+              <Text style={{color: "white"}}>{i18n.t("AdminVerPedido").Matricula} {matricula}</Text>
+            </View>
+        </View>
       </View>
+      
       <View style={{
                    flexDirection: "row"
                 }}>
       <View style={{
                     width: "70%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -84,7 +103,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
                 </View>
                 <View style={{
                     width: "15%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -92,7 +111,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
                   </View>
                   <View style={{
                     width: "15%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -137,8 +156,8 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
         )}
       </ScrollView>
     </StyledView>
-    <View>
-      <Text>{i18n.t("AdminVerPedido").Total} {totalPedido}</Text>
+    <View style={{height: 40}}>
+      <Text style={{ fontSize: 22, color: "black", fontWeight: "bold" }}>{i18n.t("AdminVerPedido").Total} {totalPedido}</Text>
     </View>
     <View style={{
           flexDirection: "row",
@@ -152,7 +171,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
             alignItems: "center",
           }}
         >
-          <StyledTouchableOpacity
+          <StyledTouchableOpacityDrop
             cambiarSpecial
             onPress={()=>eliminarPedido()}
           >
@@ -175,7 +194,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
               </Text>
               <Image source={require("../../media/icons/cancelar.png")} />
             </View>
-          </StyledTouchableOpacity>
+          </StyledTouchableOpacityDrop>
         </View>
 
         <View
@@ -195,7 +214,7 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles}) => {
             >
               <Text
                 style={{
-                  color: "#000000",
+                  color: "white",
                   fontSize: 20,
                   fontWeight: "bold",
                   paddingRight: "15%",

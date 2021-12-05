@@ -24,7 +24,7 @@ const addMenuScreen = ({}) => {
     console.log("Listando");
 
     listarItems();
-  }, []);
+  }, [setProdVisbles]);
 
   // Consultar la informacion
   const listarItems = () => {
@@ -44,36 +44,51 @@ const addMenuScreen = ({}) => {
   const [prodVisbles, setProdVisbles] = useState(false);
   const [IdPedido, setIdPedido] = useState("");
   const [totalPedido, setTotalPedido] = useState("");
+  const [nomCliente, setNomCliente] = useState("");
+  const [matriculaClie, setMatriculaClie] = useState("");
   
-  const verDetalles = (idPed, totalPed) => {
+  const verDetalles = (idPed, totalPed, clie, mat) => {
     console.log("Manda pedido: "+idPed)
     setIdPedido(idPed);
     console.log("IdPedido="+IdPedido);
     setTotalPedido(totalPed);
     setProdVisbles(true);
+    setNomCliente(clie);
+    setMatriculaClie(mat);
   };
     
   return (
     prodVisbles ? (
-      <AdminVerPedido IdPedido={IdPedido} totalPedido={totalPedido} setProdVisbles={setProdVisbles}
-    ></AdminVerPedido>
+      <AdminVerPedido IdPedido={IdPedido} totalPedido={totalPedido} setProdVisbles={setProdVisbles} nomCliente={nomCliente} matricula={matriculaClie}>
+      </AdminVerPedido>
     ):
     (
     <View style={styles.container}>
+      <View style={styles.cabeceraLstPedidos}>
+        <Text style={{color: "white"}}>{i18n.t("AdminPedidos").Descripcion}</Text>
+      </View>
       <View style={{
                    flexDirection: "row"
                 }}>
       <View style={{
-                    width: "70%",
-                    height: 50,
+                    width: "50%",
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
                   <Text>{i18n.t("AdminPedidos").Folio}</Text>
                 </View>
                 <View style={{
+                    width: "20%",
+                    height: 25,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{i18n.t("AdminPedidos").Matricula}</Text>
+                  </View>
+                <View style={{
                     width: "15%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -81,7 +96,7 @@ const addMenuScreen = ({}) => {
                   </View>
                   <View style={{
                     width: "15%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -99,12 +114,20 @@ const addMenuScreen = ({}) => {
           listar?.map((lista) => (
             <View key={lista.id} style={styles.filaLista}>
               <View style={{
-                    width: "70%",
+                    width: "50%",
                     height: 50,
                     justifyContent: "center",
                 }}
                 >
-                  <Text onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido)}>{lista.id}</Text>
+                  <Text onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido, lista.Nombre, lista.Matricula)}>{lista.id}</Text>
+                </View>
+                <View style={{
+                    width: "20%",
+                    height: 50,
+                    justifyContent: "center",
+                }}
+                >
+                  <Text>{lista.Matricula}</Text>
                 </View>
                 <View style={{
                     width: "15%",
@@ -112,7 +135,7 @@ const addMenuScreen = ({}) => {
                     justifyContent: "center",
                 }}
                 >
-                  <Text onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido)}>{lista.Total_PrecioPedido}</Text>
+                  <Text onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido, lista.Nombre, lista.Matricula)}>{lista.Total_PrecioPedido}</Text>
                 </View>
                 <View style={{
                     width: "15%",
@@ -120,7 +143,7 @@ const addMenuScreen = ({}) => {
                     justifyContent: "center",
                 }}
                 >
-                  <Icon name="arrow-forward-circle-outline" size={34} color="green" onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido)} />
+                  <Icon name="arrow-forward-circle-outline" size={34} color="green" onPress={()=>verDetalles(lista.id, lista.Total_PrecioPedido, lista.Nombre, lista.Matricula)} />
                 </View>
             </View>
             ))

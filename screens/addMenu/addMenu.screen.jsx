@@ -4,7 +4,7 @@ import { StyledView, StyledTextoLista, StyledInput } from "../../styles/StyledCo
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import AddProducto from "../addProducto";
-import ImgPickFoodScreen from "../ImgPickFood";
+import ImagePickerMenuScreen from "../ImagePickerMenu";
 import i18n from "../../localization/i18n";
 import Icon from 'react-native-vector-icons/Ionicons';
 import 'firebase/storage';
@@ -91,19 +91,19 @@ import 'firebase/storage';
       >
         <View
           style={{
-            width: "15%",
+            width: "16%",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 20, color: "white" }}>
+          <Text style={{ fontSize: 18, color: "white" }}>
             {i18n.t("AddMenuScreen").NuevoMenu}
           </Text>
         </View>
 
         <View
           style={{
-            width: "75%",
+            width: "70%",
             justifyContent: "center",
           }}
         >
@@ -116,7 +116,7 @@ import 'firebase/storage';
 
         <View
           style={{
-            width: "10%",
+            width: "15%",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -128,7 +128,7 @@ import 'firebase/storage';
               justifyContent: "center",
             }}
           >
-            <Image source={require("../../media/icons/add.png")} />
+            <Icon name="add-circle" size={34} color="orange" />
           </TouchableOpacity>
         </View>
       </View>
@@ -145,26 +145,26 @@ import 'firebase/storage';
                 <View
                   style={{
                       width: "30%",
-                      height: 50,
+                      height: 80,
                       justifyContent: "center",
                   }}
                   >
-                  <StyledTextoLista>
+                  <View>
                   <TouchableOpacity onPress={()=>cambiarFoto(item.id, item.imgUri)}>
                       <Image
                         source={{ uri: item.imgUri }}
                         style={{
-                          width: 100,
-                          height: 50
+                          width: "100%",
+                          height: 80,
                       }}
                         />
                       </TouchableOpacity>
-                    </StyledTextoLista>
+                    </View>
                   </View>
                   <View
                   style={{
-                      width: "30%",
-                      height: 50,
+                      width: "46%",
+                      height: 80,
                       justifyContent: "center",
                   }}
                   >
@@ -173,8 +173,8 @@ import 'firebase/storage';
 
                   <View
                   style={{
-                      width: "20%",
-                      height: 50,
+                      width: "12%",
+                      height: 80,
                       justifyContent: "center",
                       alignItems: "center",
                   }}
@@ -183,7 +183,7 @@ import 'firebase/storage';
                   <Icon
                     name="add-circle-outline"
                     size={34}
-                    color="green"
+                    color="#2b8a3e"
                   />
                     </TouchableOpacity>
                   
@@ -191,13 +191,13 @@ import 'firebase/storage';
 
                   <View
                   style={{
-                      width: "20%",
-                      height: 50,
+                      width: "12%",
+                      height: 80,
                       justifyContent: "center",
                       alignItems: "center",
                   }}
                   >
-                  <Icon name="trash-outline" size={34} color="red" onPress={()=>eliminarItem(item.id)} />
+                  <Icon name="trash-outline" size={34} color="#e67700" onPress={()=>eliminarItem(item.id)} />
                   </View>
               </View>
           )))}
@@ -206,7 +206,7 @@ import 'firebase/storage';
     </View>
       )
     ) : (
-      <ImgPickFoodScreen refMenu={IdMenu} refID={refID} setRefID={setRefID} refImageUri={refImageUri} setRefImageUri={setRefImageUri}  setPickerVisible={setPickerVisible} />  
+      <ImagePickerMenuScreen refMenu={IdMenu} refID={refID} setRefID={setRefID} refImageUri={refImageUri} setRefImageUri={setRefImageUri}  setPickerVisible={setPickerVisible} />  
     )
   );
 };

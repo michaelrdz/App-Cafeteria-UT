@@ -82,48 +82,30 @@ import 'firebase/storage';
   return (
     !PickerVisible ? ( 
     <View style={styles.container}>
+    <View style={styles.cabeceraGrl}>
       <View style={{
-                   flexDirection: "row"
-                }}>
-      <View
-        style={{
-          width: "20%",
+          width: "12%",
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <TouchableOpacity
+        }}>
+      <TouchableOpacity
           onPress={()=> regresaMenu()}
           style={{
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-            <Icon name="arrow-forward-circle-outline" size={34} color="green" />
+            <Icon name="arrow-back-circle" size={34} color="orange" />
         </TouchableOpacity>
       </View>
       <View
         style={{
-          width: "80%",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-        }}
-      >
-        <Text style={{ fontSize: 20, color: "black" }}>Nuevo Producto:</Text>
-      </View>
-      </View>
-    <View style={{
-                   flexDirection: "row"
-                }}
-    >
-      <View
-        style={{
-          width: "60%",
+          width: "50%",
           justifyContent: "center",
         }}
       >
         <StyledInput
-          placeholder="Ingresar nuevo producto"
+          placeholder="Ingresar producto"
           onChangeText={(text) => setTitulo(text)}
           value={titulo}
         />
@@ -144,7 +126,7 @@ import 'firebase/storage';
 
       <View
         style={{
-          width: "20%",
+          width: "18%",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -156,7 +138,7 @@ import 'firebase/storage';
             justifyContent: "center",
           }}
         >
-          <Image source={require("../../media/icons/add.png")} />
+          <Icon name="add-circle" size={34} color="orange" />
         </TouchableOpacity>
       </View>
     </View>
@@ -165,15 +147,15 @@ import 'firebase/storage';
                 }}>
       <View style={{
                     width: "40%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
                   <Text>{i18n.t("AddProductoScreen").Imagen}</Text>
                 </View>
                 <View style={{
-                    width: "35%",
-                    height: 50,
+                    width: "45%",
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -181,7 +163,7 @@ import 'firebase/storage';
                   </View>
                   <View style={{
                     width: "15%",
-                    height: 50,
+                    height: 25,
                     justifyContent: "center",
                 }}
                 >
@@ -199,7 +181,7 @@ import 'firebase/storage';
                 style={styles.filaLista} >
                   <View style={{
                     width: "40%",
-                    height: 50,
+                    height: 120,
                     justifyContent: "center",
                 }}>
                   <TouchableOpacity onPress={()=>cambiarFoto(item.id, item.imgUri)}>
@@ -207,15 +189,15 @@ import 'firebase/storage';
                       source={{ uri: item.imgUri }}
                       style={{
                         width:"100%",
-                        height: 32
+                        height: 120
                     }}
                       />
                     </TouchableOpacity>
                 </View>
                 <View
                 style={{
-                    width: "50%",
-                    height: 60,
+                    width: "45%",
+                    height: 120,
                     justifyContent: "center",
                 }}
                 >
@@ -224,13 +206,13 @@ import 'firebase/storage';
                 </View>
                 <View
                 style={{
-                    width: "10%",
-                    height: 50,
+                    width: "15%",
+                    height: 120,
                     justifyContent: "center",
                     alignItems: "center",
                 }}
                 >
-                <Icon name="trash-outline" size={34} color="red" onPress={()=>eliminarItem(item.id)} />
+                <Icon name="trash-outline" size={34} color="#e67700" onPress={()=>eliminarItem(item.id)} />
                 </View>
             </View>
         )))}

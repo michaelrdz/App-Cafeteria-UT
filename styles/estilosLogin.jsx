@@ -45,7 +45,7 @@ export const estilosLogin = StyleSheet.create({
         fontSize: 16,
       },
       buttonOutlineText: {
-        color: "#f18698",
+        color: "#5e81ac",
         fontWeight: "700",
         fontSize: 16,
       },

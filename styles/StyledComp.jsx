@@ -30,16 +30,24 @@ export const StyledInput = styled.TextInput`
   border: 4px;
   border-color: lavender;
   background-color: white;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 export const StyledTouchableOpacity = styled.TouchableOpacity`
   width: 80%;
   margin: 12px;
   padding: 10px;
-  background-color: lightcyan;
+  background-color: #5e81ac;
   border-radius: 50px;
 `;
+export const StyledTouchableOpacityDrop = styled.TouchableOpacity`
+  width: 80%;
+  margin: 12px;
+  padding: 10px;
+  background-color: #fab005;
+  border-radius: 50px;
+`;
+
 
 export const StyledViewLista = styled.View`
   margin-top: 5%;

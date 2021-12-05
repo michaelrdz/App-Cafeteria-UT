@@ -6,6 +6,7 @@ import UserScreen from "../../screens/User";
 import AddMenuScreen from "../../screens/addMenu";
 import AdminPedidosScreen from "../../screens/AdminPedidos";
 import UserMenuScreen from "../UserMenu/";
+import UserLstPedidosScreen from "../UserLstPedidos";
 import UserPedidosScreen from "../UserPedidos";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -85,7 +86,7 @@ const HomePage = () => {
           
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarInactiveTintColor: "#f18698",
+        tabBarInactiveTintColor: "#5e81ac",
         tabBarActiveTintColor: "grey"
       })}>
         <Tab.Screen name={txtMenu} children={()=> <AddMenuScreen />} />
@@ -112,11 +113,12 @@ const HomePage = () => {
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarInactiveTintColor: "#f18698",
+        tabBarInactiveTintColor: "#5e81ac",
         tabBarActiveTintColor: "grey"
       })}>
         <Tab.Screen name={txtMenu} children={()=> <UserMenuScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
-        <Tab.Screen name={txtPedidos} children={()=> <UserPedidosScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />
+        {/*<Tab.Screen name={txtPedidos} children={()=> <UserPedidosScreen PC={perdidoCarritos} SetPC={setPerdidoCarritos} />} />*/}
+        <Tab.Screen name={txtPedidos} children={()=> <UserLstPedidosScreen />} />
         <Tab.Screen name={txtUsuario} children={()=> <UserScreen />} />
       </Tab.Navigator>
     )

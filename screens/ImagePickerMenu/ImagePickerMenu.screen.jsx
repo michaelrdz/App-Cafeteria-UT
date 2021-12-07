@@ -7,7 +7,7 @@ import i18n from "../../localization/i18n";
 import { auth, database, firebase } from "../../firebase";
 import 'firebase/storage';
 
-const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageUri, setPickerVisible}) => {
+const ImagePickerMenuScreen = ({refID, setRefID,  refImageUri, setRefImageUri, setPickerVisible}) => {
     const [newImageUri, setNewImageUri] = useState("");
   // This function is triggered when the "Select an image" button pressed
   const showImagePicker = async () => {
@@ -67,7 +67,7 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
     if (!result.cancelled) {
       uploadImage(result.uri)
       .then(resolve => {
-        let ref = firebase.storage().ref().child("menu/"+refID);
+        let ref = firebase.storage().ref().child("menu/"+refID);;
         ref.put(resolve).then(resolve => {
           console.log("Imagen subida");
           //setPickedImagePath(result.uri);
@@ -103,10 +103,9 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
   }
 
   updateDBUri = (newUri) => {
-    console.log("Modificando img comida por: "+newUri);
-    console.log("en menu: "+refMenu);
-    console.log("producto: "+refID);
-    const todoRef = database.ref("/Menu/"+refMenu+"/productos").child(refID);
+    console.log("Modificando img menu por: "+newUri);
+    console.log("Menu: "+refID);
+    const todoRef = database.ref("/Menu").child(refID);
     todoRef.update({
         imgUri: newUri,
     })}
@@ -172,4 +171,4 @@ const ImgPickFoodScreen = ({refMenu, refID, setRefID,  refImageUri, setRefImageU
       );
 };
 
-export default ImgPickFoodScreen;
+export default ImagePickerMenuScreen;

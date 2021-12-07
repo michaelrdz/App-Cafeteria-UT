@@ -9,28 +9,45 @@ import {
   ScrollView,
   Alert
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import usrPic from "../../media/images/usr_profpic.png";
-import ImagePickerScreen from "../ImgPicker";
 import { estilosUsuario as styles } from "../../styles/estilosUsuario";
+import { estilosLista as styles2 } from "../../styles/estilosLista";
 import Icon from "react-native-vector-icons/Ionicons";
 import i18n from "../../localization/i18n";
+import emptyImg from "../../media/images/emptyList.png";
 import { auth, database, firebase } from "../../firebase";
 import "firebase/storage";
-import { StyledTouchableOpacity } from "../../styles/StyledComp";
+import { StyledTouchableOpacity, StyledTouchableOpacityDrop } from "../../styles/StyledComp";
 
 const UserPedidosScreen = (props) => {
+
+  const [userName, setUserName] = useState('');
+  const [matricula, setMatricula] = useState('');
+
+  const ConsultaBD = () => {
+    const todoRef = database
+    .ref("Usuarios/"+auth.currentUser?.uid)
+    .once('value')
+    .then(snapshot => {
+      console.log('User info: ', snapshot.val().Nombre);
+      setUserName(snapshot.val().Nombre);
+      setMatricula(snapshot.val().Matricula);
+    });
+
+  };
   
   const perdidosPago = {
     Estatus: "Pendiente",
     Cliente: auth.currentUser?.uid,
+    Nombre: userName,
+    Matricula: matricula,
     Total_PrecioPedido: ObtnerTotales(),
     Productos: { ...props.PC},
   };
 
   useEffect(() => {
     console.log(perdidosPago);
-  }, []);
+    ConsultaBD();
+  }, [props.miCarrito]);
 
   function currencyFormat(num) {
     return parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -71,6 +88,7 @@ const UserPedidosScreen = (props) => {
 
     if(eliminaPrd) {
       eliminarItem(prdID);
+      props.setMiCarrito(parseInt(props.miCarrito)-1);
     }else {
       let newTotal =  parseFloat(newCantidad) * parseFloat(precio);
       //console.log("actualiza cant - newTotal: "+newTotal);
@@ -91,7 +109,10 @@ const UserPedidosScreen = (props) => {
       i18n.t("UserPedidos").alertEliminarMsg,
       [
         {text: i18n.t("UserPedidos").alertEliminarSi, onPress: () => 
-        props.SetPC([])
+        {props.SetPC([]);
+        props.setMiCarrito([0]);
+        props.setVerCarrito(false);
+      }
       },
         {text: i18n.t("UserPedidos").alertEliminarNo, onPress: () => console.log("usuario cancelo eliminar"), style: "cancel"},
       ],
@@ -114,7 +135,9 @@ const UserPedidosScreen = (props) => {
             todoRef.push(perdidosPago);
             //console.log(perdidosPago);
             props.SetPC([]);
+            props.setMiCarrito([0]);
             alert(i18n.t("UserPedidos").alertEnvio);
+            props.setVerCarrito(false);
           } else {
             alert(i18n.t("UserPedidos").alertVacio);
           }
@@ -129,6 +152,10 @@ const UserPedidosScreen = (props) => {
         cancelable: true
       }
     );
+  };
+
+  const regresaAtras = () => {
+    props.setVerCarrito(false);
   };
 
   return (
@@ -197,9 +224,11 @@ const UserPedidosScreen = (props) => {
       >
         <ScrollView>
           {props.PC.length === 0 ? (
-            <Text style={styles.textoListaVacia}>
-              {i18n.t("AdminPedidos").NoProductos}
-            </Text>
+            <View style={{flex: 1, alignItems: "center", alignContent: "center"}}>
+              <Image source={emptyImg} style={{width: "100%"}} />
+              <Text style={{fontSize: 20}}>{i18n.t("AdminPedidos").NoProductos}</Text>
+            </View>
+            
           ) : (
             props.PC?.map((item) => (
               <View
@@ -212,25 +241,11 @@ const UserPedidosScreen = (props) => {
               >
                 <View
                   style={{
-                    width: "5%",
+                    width: "40%",
                     justifyContent: "center",
                   }}
                 >
-                  <Icon
-                    name="trash-outline"
-                    size={20}
-                    color="red"
-                    onPress={() => eliminarItem(item.id)}
-                  />
-                </View>
-
-                <View
-                  style={{
-                    width: "35%",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text style={{ fontSize: 20, color: "black" }}>
+                  <Text style={{ fontSize: 16, color: "black" }}>
                     {item.Productos}
                   </Text>
                 </View>
@@ -239,16 +254,16 @@ const UserPedidosScreen = (props) => {
                   style={{
                     width: "20%",
                     justifyContent: "center",
-                    alignItems: "flex-start",
+                    alignItems: "center",
                     flexDirection: "row"
                   }}
                 >
-                  <Icon name="remove-circle" size={34} color="red" 
+                  <Icon name="remove-circle" size={28} color="red" 
                   onPress={()=>cambiaCantidad(item.id, item.Precio, item.Cantidad, "res")} />
                   <Text style={{ fontSize: 20, color: "black" }}>
-                    {item.Cantidad}
+                    {item.Cantidad} 
                   </Text>
-                  <Icon name="add-circle" size={34} color="green" 
+                  <Icon name="add-circle" size={28} color="green" 
                   onPress={()=>cambiaCantidad(item.id, item.Precio, item.Cantidad, "sum")} />
                 </View>
 
@@ -256,11 +271,11 @@ const UserPedidosScreen = (props) => {
                   style={{
                     width: "20%",
                     justifyContent: "center",
-                    alignItems: "flex-end",
+                    alignItems: "center",
                   }}
                 >
                   <Text style={{ fontSize: 20, color: "black" }}>
-                    {item.Precio}
+                    ${item.Precio}
                   </Text>
                 </View>
 
@@ -268,12 +283,12 @@ const UserPedidosScreen = (props) => {
                   style={{
                     width: "20%",
                     justifyContent: "center",
-                    alignItems: "flex-end",
+                    alignItems: "center",
                   }}
                 >
                   <Text style={{ fontSize: 20, color: "black" }}>
-                    {item.Total}
-                    {/*currencyFormat(item.Cantidad * item.Precio)*/}
+                    ${item.Total}
+                    
                   </Text>
                 </View>
               </View>
@@ -289,9 +304,25 @@ const UserPedidosScreen = (props) => {
           height: 50,
         }}
       >
+        <View style={{width: "24%", justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",}}>
+              <View></View>
+              <View></View>
+          <TouchableOpacity
+            onPress={() => regresaAtras()}
+            style={{
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Icon name="arrow-back-outline" size={34} color="#5e81ac" />
+          </TouchableOpacity>
+          <Text onPress={() => regresaAtras()} style={{fontSize: 16, color: "black"}}>{i18n.t("UserPedidos").atras}</Text>
+        </View>
         <View
           style={{
-            width: "75%",
+            width: "56%",
             justifyContent: "center",
             alignItems: "flex-end",
           }}
@@ -303,7 +334,7 @@ const UserPedidosScreen = (props) => {
 
         <View
           style={{
-            width: "25%",
+            width: "20%",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
@@ -333,7 +364,7 @@ const UserPedidosScreen = (props) => {
             alignItems: "center",
           }}
         >
-          <StyledTouchableOpacity
+          <StyledTouchableOpacityDrop
             cambiarSpecial
             onPress={() => vaciarCarrito()}
           >
@@ -356,7 +387,7 @@ const UserPedidosScreen = (props) => {
               </Text>
               <Image source={require("../../media/icons/cancelar.png")} />
             </View>
-          </StyledTouchableOpacity>
+          </StyledTouchableOpacityDrop>
         </View>
 
         <View
@@ -376,7 +407,7 @@ const UserPedidosScreen = (props) => {
             >
               <Text
                 style={{
-                  color: "#000000",
+                  color: "white",
                   fontSize: 20,
                   fontWeight: "bold",
                   paddingRight: "15%",

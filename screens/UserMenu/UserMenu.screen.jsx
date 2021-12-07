@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  ImageBackground
 } from "react-native";
 import {
   StyledView,
@@ -17,16 +18,19 @@ import UserListaProductos from "../UserListaProductos";
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
 import i18n from "../../localization/i18n";
+import UserPedidosScreen from "../UserPedidos";
+import cartImg from "../../media/images/ico_cart.png";
 import Icon from "react-native-vector-icons/Ionicons";
 import "firebase/storage";
 
 const UserMenuScreen = (props) => {
   const [listar, setListar] = useState([]);
+  const [miCarrito, setMiCarrito] = useState([0]);
 
   useEffect(() => {
     console.log("Listando");
     listarItems();
-  }, []);
+  }, [verCarrito]);
 
   // Consultar la informacion
   const listarItems = () => {
@@ -80,6 +84,7 @@ const UserMenuScreen = (props) => {
           Total: parseFloat(total),
         },
       ]);
+      setMiCarrito(parseInt(miCarrito)+1);
       alert(i18n.t("UserMenu").alertAgregado);
     }else {
       //Actualizando productos
@@ -88,15 +93,47 @@ const UserMenuScreen = (props) => {
     }
   };
 
+    //Ver carrito
+    const[verCarrito, setVerCarrito] = useState(false);
+
+    const abrirCarrito = () => {
+      setVerCarrito(true);
+    };
+
   return prodVisbles ? (
     <UserListaProductos
       setProdVisbles={setProdVisbles}
       IdMenu={IdMenu}
       setIdMenu={setIdMenu}
       AC={agregarCarritos}
+      miCarrito={miCarrito} 
+      setMiCarrito={setMiCarrito}
+      PC={props.PC}
+      SetPC={props.SetPC}
     ></UserListaProductos>
   ) : (
+    verCarrito ? (
+      <UserPedidosScreen PC={props.PC} SetPC={props.SetPC} setVerCarrito={setVerCarrito} miCarrito={miCarrito} setMiCarrito={setMiCarrito} />
+    ) : (
     <View style={styles.container}>
+      <View style={{width: "100%", backgroundColor:"#4c566a", height: 100, justifyContent: "center", alignItems: "flex-end" }}>
+        <View style={{width: 70,}}>
+        <TouchableOpacity onPress={() => abrirCarrito()} style={{width: 64, height: 64, position: 'relative'}}>
+        <ImageBackground
+            source={cartImg }
+            style={{
+              height: 64,
+              width: 64,
+              position: 'absolute',
+            }}
+          />
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ fontSize: 34, color: "black", fontWeight: "bold" }}>{miCarrito}</Text></View>
+        </TouchableOpacity>
+        <Text style={{ fontSize: 14, color: "white" }} onPress={() => abrirCarrito()}>
+        {i18n.t("UserCarrito").verCarrito}</Text>
+        </View>
+      </View>
       <StyledView special1>
         <ScrollView>
           {listar.length === 0 ? (
@@ -108,21 +145,21 @@ const UserMenuScreen = (props) => {
               <View key={item.id} style={styles.filaLista}>
                 <View style={{
                     width: "30%",
-                    height: 50,
+                    height: 100,
                     justifyContent: "center",
                   }}>
                       <Image
                         source={{ uri: item.imgUri }}
                         style={{
-                          width: 100,
-                          height: 50
+                          width: "100%",
+                          height: 100
                       }}
                         />
                 </View>
                 <View
                   style={{
                     width: "50%",
-                    height: 50,
+                    height: 100,
                     justifyContent: "center",
                   }}
                 >
@@ -134,7 +171,7 @@ const UserMenuScreen = (props) => {
                 <View
                   style={{
                     width: "20%",
-                    height: 50,
+                    height: 100,
                     justifyContent: "center",
                     alignItems: "center",
                   }}
@@ -142,7 +179,7 @@ const UserMenuScreen = (props) => {
                   <TouchableOpacity
                     onPress={() => elegirProductos(item.id)}
                   >
-                    <Icon name="arrow-forward-circle-outline" size={34} color="green" />
+                    <Icon name="arrow-forward-circle-outline" size={34} color="#5e81ac" />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -151,6 +188,7 @@ const UserMenuScreen = (props) => {
         </ScrollView>
       </StyledView>
     </View>
+    )
   );
 };
 export default UserMenuScreen;

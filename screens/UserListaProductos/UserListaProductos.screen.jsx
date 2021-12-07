@@ -7,6 +7,7 @@ import {
   TextInput,
   Image,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import {
   StyledView,
@@ -15,6 +16,8 @@ import {
 } from "../../styles/StyledComp";
 import { auth, database } from "../../firebase";
 import { estilosLista as styles } from "../../styles/estilosLista";
+import UserPedidosScreen from "../UserPedidos";
+import cartImg from "../../media/images/ico_cart.png";
 import Icon from "react-native-vector-icons/Ionicons";
 import i18n from "../../localization/i18n";
 import "firebase/storage";
@@ -24,6 +27,10 @@ const UserListaProductosScreen = ({
   IdMenu,
   setIdMenu,
   AC,
+  miCarrito,
+  setMiCarrito,
+  PC,
+  SetPC,
 }) => {
   const [listar, setListar] = useState([]);
   //const [cantidad, setCantidad] = useState();
@@ -31,14 +38,14 @@ const UserListaProductosScreen = ({
   useEffect(() => {
     console.log("Listando");
     listarItems();
-  }, []);
+  }, [verCarrito]);
 
   // Nuevo Item
   const agregarCarrito = (id, pd, c, pr, t) => {
     //AGREGAR producto a un objeto Pedido que deberá estar en Home.jsx
     AC(id, pd, c, pr, t);
     //setCantidad(0);
-    console.log("producto: " + pd);
+    //console.log("producto: " + pd);
   };
 
   // Consultar la informacion
@@ -56,20 +63,25 @@ const UserListaProductosScreen = ({
     });
   };
 
+  //Ver carrito
+  const[verCarrito, setVerCarrito] = useState(false);
+
+  const abrirCarrito = () => {
+    setVerCarrito(true);
+  };
+
+
   const regresaMenu = () => {
     setProdVisbles(false);
   };
 
   return (
-    <View style={styles.container}>
-      <View>
-        <View
-          style={{
-            width: "100%",
-            justifyContent: "flex-start",
-            alignItems: "center",
-          }}
-        >
+    verCarrito ? (
+      <UserPedidosScreen PC={PC} SetPC={SetPC} setVerCarrito={setVerCarrito} miCarrito={miCarrito} setMiCarrito={setMiCarrito} />
+    ) : (
+      <View style={styles.container}>
+        <View style={{width: "100%", backgroundColor:"#4c566a", height: 100, justifyContent: "flex-end", alignItems: "center", flexDirection: "row" }}>
+        <View style={{width: "130%", height: 100, alignItems:"center", justifyContent: "center", flexDirection: "row"}}>
           <TouchableOpacity
             onPress={() => regresaMenu()}
             style={{
@@ -77,11 +89,28 @@ const UserListaProductosScreen = ({
               justifyContent: "flex-start",
             }}
           >
-            <Icon name="arrow-back-outline" size={34} color="green" />
-            {/*<Image source={require("../../media/icons/add.png")} />*/}
+            <Icon name="arrow-back-outline" size={34} color="white" />
           </TouchableOpacity>
+          <Text style={{ fontSize: 16, color: "white", fontWeight: "bold" }}>{i18n.t("UserPedidos").atras}</Text>
+        </View>
+        <View style={{width: 70,}}>
+        <TouchableOpacity onPress={() => abrirCarrito()} style={{width: 64, height: 64, position: 'relative'}}>
+        <ImageBackground
+            source={cartImg}
+            style={{
+              height: 64,
+              width: 64,
+              position: 'absolute',
+            }}
+          />
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={{ fontSize: 34, color: "black", fontWeight: "bold" }}>{miCarrito}</Text></View>
+        </TouchableOpacity>
+        <Text style={{ fontSize: 14, color: "white" }} onPress={() => abrirCarrito()}>
+        {i18n.t("UserCarrito").verCarrito}</Text>
         </View>
       </View>
+      
       <StyledView special1>
         <ScrollView>
           {listar.length === 0 ? (
@@ -94,7 +123,7 @@ const UserListaProductosScreen = ({
                 <View
                   style={{
                     width: "40%",
-                    height: 40,
+                    height: 120,
                     justifyContent: "center",
                   }}
                 >
@@ -102,35 +131,28 @@ const UserListaProductosScreen = ({
                       source={{ uri: item.imgUri }}
                       style={{
                         width:"100%",
-                        height: 50
+                        height: 120
                     }}
                       />
                 </View>
                 <View
                   style={{
-                    width: "30%",
-                    height: 40,
+                    width: "48%",
+                    height: 120,
                     justifyContent: "center",
                   }}
                 >
+                  <View>
                   <StyledTextoLista>{item.Titulo}</StyledTextoLista>
-                </View>
-
-                <View
-                  style={{
-                    width: "20%",
-                    height: 50,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+                  </View>
+                  <View>
                   <StyledTextoLista>$ {item.Precio}</StyledTextoLista>
+                  </View>
                 </View>
-
                 <View
                   style={{
-                    width: "10%",
-                    height: 50,
+                    width: "12%",
+                    height: 120,
                     justifyContent: "center",
                     alignItems: "center",
                   }}
@@ -156,6 +178,8 @@ const UserListaProductosScreen = ({
         </ScrollView>
       </StyledView>
     </View>
+    )
+    
   );
 };
 export default UserListaProductosScreen;

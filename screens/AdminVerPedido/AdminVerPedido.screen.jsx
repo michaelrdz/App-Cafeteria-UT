@@ -20,6 +20,7 @@ import { estilosLista as styles } from "../../styles/estilosLista";
 import { StyledTouchableOpacity } from "../../styles/StyledComp";
 import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
+import emptyImg from "../../media/images/emptyList.png";
 import "firebase/storage";
 
 const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles, nomCliente, matricula}) => {
@@ -121,9 +122,10 @@ const AdminVerPedidoScreen = ({IdPedido, totalPedido, setProdVisbles, nomCliente
       <StyledView special1>
       <ScrollView>
         {listar.length === 0 ? (
-          <Text style={styles.textoListaVacia}>
-            {i18n.t("AdminPedidos").NoProductos}
-          </Text>
+          <View style={{flex: 1, alignItems: "center", alignContent: "center"}}>
+          <Image source={emptyImg} style={{width: "100%"}} />
+          <Text style={{fontSize: 20}}>{i18n.t("AdminPedidos").NoProductos}</Text>
+        </View>
         ) : (
         listar?.map((lista) => (
           <View key={lista.id} style={styles.filaLista}>

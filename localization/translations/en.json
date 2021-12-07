@@ -35,10 +35,12 @@
         "AlertAdd": "Put title / price"
     },
     "AdminPedidos": {
+        "Descripcion": "List of pending orders, click on the arrow to see details.",
         "NoProductos": "No elements to list",
         "Folio": "Order",
         "Total": "Total",
-        "Detalles": "Details"
+        "Detalles": "Details",
+        "Matricula": "Student ID"
     },
     "AdminVerPedido": {
         "Orden": "Order: ",
@@ -48,12 +50,13 @@
         "Totales": "Amount",
         "Total": "Order sumary:",
         "btnEliminar": "Drop Order",
-        "btnAtender": "Order Attended"
+        "btnAtender": "Order Attended",
+        "Nombre": "Name:"
     },
     "UserMenu": {
         "productos": "See products",
-        "alertAgregado": "Product added",
-        "alertActualizado": "Order updated"
+        "alertAgregado": "Product added to your order, click on 'cart' ",
+        "alertActualizado": "Order updated, click on 'cart'"
     },
     "UserPedidos": {
         "PedidosVacio": "No orders to list",
@@ -70,8 +73,10 @@
         "alertEliminarNo": "No",
         "alertConfirmarTit": "Confirm order",
         "alertConfirmarMsg": "Do you want to send your order?",
-        "alertEnvio": "Order received successfully",
-        "alertVacio": "there is no products on your order!"
+        "alertEnvio": "Go to the cafeteria in 10 minutes for your order... To follow up on your order go to 'Orders' ",
+        "alertVacio": "there is no products on your order!",
+        "atras": "Back",
+        "Descripcion": "Pick up your orders at the university cafeteria cashier with your folio and Student ID"
     },
     "userScreen": {
         "nombre": "Name:",
@@ -83,5 +88,8 @@
         "Camara": "Open camera",
         "Cancelar": "Go back",
         "Refuse": "You've refused to allow this appp to access your photos!"
+    },
+    "UserCarrito": {
+        "verCarrito": "Go cart"
     }
 }

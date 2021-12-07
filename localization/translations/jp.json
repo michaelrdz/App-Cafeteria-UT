@@ -35,10 +35,12 @@
         "AlertAdd": "タイトル/価格を入力してください"
     },
     "AdminPedidos": {
+        "Descripcion": "保留中の注文のリスト。矢印をクリックして詳細を表示します ",
         "NoProductos": "表示するアイテムがありません",
         "Folio": "フォリオ",
         "Total": "合計",
-        "Detalles": "詳細"
+        "Detalles": "詳細",
+        "Matricula": "登録"
     },
     "AdminVerPedido": {
         "Orden": "注文:",
@@ -48,7 +50,8 @@
         "Totales": "合計",
         "Total": "注文合計:",
         "btnEliminar": "注文の削除",
-        "btnAtender": "注文に参加しました"
+        "btnAtender": "注文に参加しました",
+        "Nombre": "名前:"
     },
     "UserMenu": {
         "productos": "製品を見る",
@@ -71,7 +74,9 @@
         "alertConfirmarTit": "注文の確認",
         "alertConfirmarMsg": "注文を送信しますか？",
         "alertEnvio": "注文は正常に送信されました",
-        "alertVacio": "ご注文の商品はありません"
+        "alertVacio": "ご注文の商品はありません",
+        "atras": "戻る",
+        "Descripcion": "フォリオと登録を使用して、大学のカフェテリアのレジで注文を受け取ります"
     },
     "userScreen": {
         "nombre": "名前:",
@@ -83,5 +88,8 @@
         "Camara": "オープンカメラ",
         "Cancelar": "キャンセル",
         "Refuse": "権限がないと、画像にアクセスできません"
-    }
+    },
+    "UserCarrito": {
+        "verCarrito": "カートに行く"
+    } 
 }

@@ -14,6 +14,8 @@ import { estilosLista as styles } from "../../styles/estilosLista";
 import AdminVerPedido from "../AdminVerPedido";
 import i18n from "../../localization/i18n";
 import Icon from "react-native-vector-icons/Ionicons";
+import appIcon from "../../media/images/app_ico.png";
+import emptyImg from "../../media/images/emptyList.png";
 import "firebase/storage";
 
 const addMenuScreen = ({}) => {
@@ -65,7 +67,12 @@ const addMenuScreen = ({}) => {
     (
     <View style={styles.container}>
       <View style={styles.cabeceraLstPedidos}>
-        <Text style={{color: "white"}}>{i18n.t("AdminPedidos").Descripcion}</Text>
+      <View style={{width: "30%", alignItems: "center", alignContent: "center"}}>
+          <Image source={appIcon} />
+        </View>
+        <View style={{width: "70%"}}>
+          <Text style={{color: "white"}}>{i18n.t("AdminPedidos").Descripcion}</Text>
+        </View>
       </View>
       <View style={{
                    flexDirection: "row"
@@ -106,9 +113,10 @@ const addMenuScreen = ({}) => {
     <StyledView special1>
       <ScrollView>
         {listar.length === 0 ? (
-          <Text style={styles.textoListaVacia}>
-            {i18n.t("AdminPedidos").NoProductos}
-          </Text>
+          <View style={{flex: 1, alignItems: "center", alignContent: "center"}}>
+          <Image source={emptyImg} style={{width: "100%"}} />
+          <Text style={{fontSize: 20}}>{i18n.t("AdminPedidos").NoProductos}</Text>
+        </View>
         ) : (
           
           listar?.map((lista) => (

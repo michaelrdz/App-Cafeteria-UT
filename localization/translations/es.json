@@ -35,10 +35,12 @@
         "AlertAdd": "Ingresar título / precio"
     },
     "AdminPedidos": {
+        "Descripcion": "Lista de pedidos pendientes, dar click en la flecha para ver detalles.",
         "NoProductos": "No hay elementos para mostrar",
         "Folio": "Folio",
         "Total": "Total",
-        "Detalles": "Detalles"
+        "Detalles": "Detalles",
+        "Matricula": "Matrícula"
     },
     "AdminVerPedido": {
         "Orden": "Orden:",
@@ -48,12 +50,13 @@
         "Totales": "Total",
         "Total": "Total del pedido:",
         "btnEliminar": "Eliminar Pedido",
-        "btnAtender": "Orden Atendida"
+        "btnAtender": "Orden Atendida",
+        "Nombre": "Nombre:"
     },
     "UserMenu": {
         "productos": "Ver productos",
-        "alertAgregado": "Producto agregado a su pedido",
-        "alertActualizado": "Pedido actualizado"
+        "alertAgregado": "Producto agregado a su pedido, de click en 'carrito'",
+        "alertActualizado": "Pedido actualizado, de click en 'carrito'"
     },
     "UserPedidos": {
         "PedidosVacio": "No hay pedidos para mostrar",
@@ -70,8 +73,10 @@
         "alertEliminarNo": "No",
         "alertConfirmarTit": "Confirmar pedido",
         "alertConfirmarMsg": "¿Quiere enviar su orden?",
-        "alertEnvio": "Pedido enviado con éxito",
-        "alertVacio": "No hay productos en su orden"
+        "alertEnvio": "Pase a cafetería en 10 minutos por su pedido... Para dar seguimiento a su orden dirijase a 'Pedidos'",
+        "alertVacio": "No hay productos en su orden",
+        "atras": "Volver",
+        "Descripcion": "Pase a recoger sus pedidos a la caja de la cafetería de la universidad con su folio y matrícula"
     },
     "userScreen": {
         "nombre": "Nombre:",
@@ -83,5 +88,8 @@
         "Camara": "Abrir camara",
         "Cancelar": "Cancelar",
         "Refuse": "Sin permisos no se podrá acceder a sus imagenes"
+    },
+    "UserCarrito": {
+        "verCarrito": "Ver carrito"
     }
 }

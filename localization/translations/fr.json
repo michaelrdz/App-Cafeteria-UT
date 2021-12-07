@@ -35,10 +35,12 @@
         "AlertAdd": "Entrez le titre / le prix"
     },
     "AdminPedidos": {
+        "Descripcion": "Liste des commandes en attente, cliquez sur la flèche pour voir les détails",
         "NoProductos": "Il n'y a aucun élément à afficher",
         "Folio": "Folio",
         "Total": "Total",
-        "Detalles": "Détails"
+        "Detalles": "Détails",
+        "Matricula": "inscription "
     },
     "AdminVerPedido": {
         "Orden": "Ordre:",
@@ -48,7 +50,8 @@
         "Totales": "Totaux",
         "Total": "Total de la ordre:",
         "btnEliminar": "Supprimer la ordre",
-        "btnAtender": "Ordre suivi"
+        "btnAtender": "Ordre suivi",
+        "Nombre": "Nom:"
     },
     "UserMenu": {
         "productos": "Voir les produits",
@@ -71,7 +74,9 @@
         "alertConfirmarTit": "Confirmer ?",
         "alertConfirmarMsg": "Voulez-vous envoyer votre ordre ?",
         "alertEnvio": "Ordre envoyée avec succès",
-        "alertVacio": "Il n'y a aucun produit dans votre ordre"
+        "alertVacio": "Il n'y a aucun produit dans votre ordre",
+        "atras": "revenir",
+        "Descripcion": "Retrait de vos commandes à la caisse de la cafétéria universitaire avec votre folio et votre ID"
     },
     "userScreen": {
         "nombre": "Nombre:",
@@ -83,5 +88,8 @@
         "Camara": "Ouvrir la caméra",
         "Cancelar": "Annuler",
         "Refuse": "Sans autorisations, vous ne pourrez pas accéder à vos images"
+    },
+    "UserCarrito": {
+        "verCarrito": "Ordre"
     }
 }

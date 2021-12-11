@@ -4,6 +4,7 @@ npm install @react-navigation/native
 expo install react-native-screens react-native-safe-area-context
 npm install @react-navigation/native-stack
 npm install @react-navigation/bottom-tabs
+npm install react-native-elements
 
 npm install --save styled-components
 
@@ -12,6 +13,3 @@ expo install expo-image-picker
 
 expo install expo-localization
 npm i i18n-js
-
-npm i jest-expo --save-dev
-npm i react-test-renderer --save-dev
